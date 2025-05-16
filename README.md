@@ -1,2 +1,2 @@
 # recipe-app-api
-this is an api repo tha helps to make me understand making RESTful apps.
+this is an api repo that helps to make me understand making RESTful apps.

@@ -4,7 +4,7 @@
 FROM python:3.9-alpine3.13
 LABEL maintainer = "Martins John" 
 
-#this tells the docker to npt allow any delay in output
+#this tells the docker to not allow any delay in output
 ENV PYTHONUNBUFFERED=1
 
 
