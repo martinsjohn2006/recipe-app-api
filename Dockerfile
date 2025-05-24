@@ -20,15 +20,25 @@ EXPOSE 8000
 #as soon as they are done installing, we remove them as we would love to keep our image as light as possible
 #look at the "adduser" part, this creates a user in the linux system as we do not wish to 
 #use the root user by default "django-user" is the name of the created user.
+# it is also important to note that we just recently added a new command to the run block 
+# this command installs all the needed dependencies for us to install psycopg2 and after we are done, we delete
+# them, you can identify this line below as it starts with the alpine package manager "apk", now, one cool feature 
+# with the installation is the there is a --virtual argument that helps us give a group name to a group of packages
+# we wish to install and as soon as we are done we can make a delete of this packages using the group installation name.
+
 
 ARG DEV=false
 RUN python -m venv /py && \
     /py/bin/pip install --upgrade pip && \
+    apk add --update --no-cache postgresql-client && \
+    apk add --update --no-cache --virtual .tmp-build-deps \
+        build-base postgresql-dev musl-dev && \
     /py/bin/pip install -r /tmp/requirements.txt && \
     if [ $DEV = "true" ]; \
         then /py/bin/pip install -r /tmp/requirements.dev.txt ; \
     fi && \
     rm -rf /tmp && \
+    apk del .tmp-build-deps && \
     adduser \
         --disabled-password \
         --no-create-home \
