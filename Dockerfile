@@ -2,7 +2,7 @@
 #  this also tells docker what version of the linux operating system to use
 #the name or website of the person intending to manage this project
 FROM python:3.9-alpine3.13
-LABEL maintainer = "Martins John" 
+LABEL maintainer="Martins John" 
 
 #this tells the docker to not allow any delay in output
 ENV PYTHONUNBUFFERED=1
