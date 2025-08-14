@@ -40,3 +40,4 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(models.User, UserAdmin) #you will not only register the model
 # but you would also register your custom user admin manager.
+admin.site.register(models.Recipe)

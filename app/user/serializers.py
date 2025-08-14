@@ -60,3 +60,4 @@ class AuthTokenSerializer(serializers.Serializer):
         
         attrs["user"] = user # this adds the already validated user to the attrs dictionary.
         return attrs
+        
