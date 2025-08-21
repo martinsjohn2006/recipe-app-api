@@ -10,7 +10,8 @@ from recipe import views
 
 router = DefaultRouter()  #using this Default router provided by django, the url endpoints for our django view set 
 # would be auto created and match appropraitely without us needing to manually type out all urls.
-router.register("/recipes", views.RecipeViewSet)
+router.register("recipes", views.RecipeViewSet)
+router.register("tags", views.TagViewSet)
 
 app_name = "recipe"
 

@@ -1,11 +1,11 @@
 """
 Views for the recipe API
 """
-from rest_framework import viewsets
+from rest_framework import viewsets, mixins
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from db_connection.models import Recipe 
+from db_connection.models import Recipe, Tag 
 from recipe import serializers
 
 
@@ -38,3 +38,15 @@ class RecipeViewSet(viewsets.ModelViewSet):
        # we are creating a way to get to set the user id on the server side instead of the client having 
         # to send it, we do not want that, if we do not do it, when we try to save a recipe, it would tell 
         # us that the data column is null
+
+class TagViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    """Manage tags in the database"""
+    serializer_class = serializers.TagSerializer
+    queryset = Tag.objects.all()
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        """filter the queryset to only include that of the authenticated user making the request"""
+        return self.queryset.filter(user=self.request.user).order_by("-name")
+    
