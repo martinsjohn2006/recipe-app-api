@@ -14,8 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ["email","password","name"]
         extra_kwargs = {"password":{"write_only":True, "min_length": 5}}
 
-    def create(self, validated_data): #this is actually overriding the inherited created method so that we 
-        #can save the password and other data after it as been vaidated by the serializer
+    def create(self, validated_data): # this ensures that the password is hashed and not saved as plane text
         """Create and return a user with encrypted password"""
         return get_user_model().objects.create_user(**validated_data)
 

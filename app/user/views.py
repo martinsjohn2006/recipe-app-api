@@ -15,7 +15,8 @@ class CreateUserView(generics.CreateAPIView):
 
 class CreateTokenView(ObtainAuthToken):
     """Create a new auth token for user"""
-    serializer_class = AuthTokenSerializer
+    serializer_class = AuthTokenSerializer  # this checks if the token already exists in the authtoken
+    #if it does not, it creates one and returns that token to the frontend.
     # this is to tell it to render to our browsable web api endpoint
     renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
 

@@ -120,8 +120,7 @@ class PublicUserApiTests(TestCase):
             
             self.assertEqual(res.data,{
                 "name": self.user.name,
-                "email": self.user.password,
-            } )
+                "email": self.user.email})
             self.assertEqual(res.status_code, HTTP_200_OK)
 
         def test_post_me_not_allowed(self):
