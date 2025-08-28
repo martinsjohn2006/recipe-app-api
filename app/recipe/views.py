@@ -39,7 +39,11 @@ class RecipeViewSet(viewsets.ModelViewSet):
         # to send it, we do not want that, if we do not do it, when we try to save a recipe, it would tell 
         # us that the data column is null
 
-class TagViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+class TagViewSet(
+    mixins.DestroyModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet):
     """Manage tags in the database"""
     serializer_class = serializers.TagSerializer
     queryset = Tag.objects.all()
@@ -49,4 +53,6 @@ class TagViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     def get_queryset(self):
         """filter the queryset to only include that of the authenticated user making the request"""
         return self.queryset.filter(user=self.request.user).order_by("-name")
+
+
     
