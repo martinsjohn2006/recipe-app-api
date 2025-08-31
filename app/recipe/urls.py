@@ -12,6 +12,7 @@ router = DefaultRouter()  #using this Default router provided by django, the url
 # would be auto created and match appropraitely without us needing to manually type out all urls.
 router.register("recipes", views.RecipeViewSet)
 router.register("tags", views.TagViewSet)
+router.register("ingredients", views.IngredientViewSet)
 
 app_name = "recipe"
 

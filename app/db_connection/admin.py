@@ -42,3 +42,4 @@ admin.site.register(models.User, UserAdmin) #you will not only register the mode
 # but you would also register your custom user admin manager.
 admin.site.register(models.Recipe)
 admin.site.register(models.Tag)
+admin.site.register(models.Ingredient) # registering the ingredient model with the admin site

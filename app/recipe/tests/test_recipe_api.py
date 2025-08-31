@@ -9,7 +9,9 @@ from django.urls import reverse
 from rest_framework import status 
 from rest_framework.test import APIClient
 
-from db_connection.models import Recipe, Tag
+from db_connection.models import (Recipe,
+                                  Tag,
+                                  Ingredient)
 
 from recipe.serializers import RecipeSerializer, RecipeDetailSerializer
 
@@ -240,7 +242,8 @@ class PrivateRecipeAPITests(TestCase):
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         new_tag = Tag.objects.filter(user=self.user, name="Lunch")
-        self.assertIn(new_tag,recipe.tags.all())
+        for tag in new_tag:
+            self.assertIn(tag, recipe.tags.all())
 
     def test_update_recipe_with_already_existing_tag(self):
         """Test assigning an already existing tag when updating a recipe, and removes old tags if not in update"""
@@ -270,4 +273,4 @@ class PrivateRecipeAPITests(TestCase):
         res = self.client.patch(url, payload,format="json")
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        self.assertEqual(recipe.tags.all(), 0)
+        self.assertEqual(recipe.tags.count(), 0)

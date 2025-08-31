@@ -3,7 +3,7 @@ Serializers for the recipe API
 """
 from rest_framework import serializers
 
-from db_connection.models import Recipe, Tag
+from db_connection.models import Recipe, Tag ,Ingredient
 
 class TagSerializer(serializers.ModelSerializer):
     """Serializer for the tag model"""
@@ -11,6 +11,13 @@ class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
         fields= ["id", "name"]
+        read_only_fields = ["id"]
+
+class IngredientSerializer(serializers.ModelSerializer):
+    """Serializer for the ingredient model"""
+    class Meta:
+        model = Ingredient
+        fields = ["id", "name"]
         read_only_fields = ["id"]
 
 class RecipeSerializer(serializers.ModelSerializer):
