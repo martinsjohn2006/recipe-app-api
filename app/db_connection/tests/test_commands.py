@@ -17,7 +17,7 @@ from django.test import SimpleTestCase
 @patch('db_connection.management.commands.wait_for_db.Command.check')
 class CommandTest(SimpleTestCase):
     """Test commands"""
-    def test_wait_for_db_ready(self, patched_check):
+    def test_wait_for_db_ready(self, patched_check): 
         """Test waiting for database and mocks the situation
         where the db is ready immediately"""
         patched_check.return_value = True

@@ -80,4 +80,15 @@ class RecipeDetailSerializer(RecipeSerializer):
     """Serializer for recipe detial view"""
 
     class Meta(RecipeSerializer.Meta):
-        fields = RecipeSerializer.Meta.fields + ["description"]
+        fields = RecipeSerializer.Meta.fields + ["description", "image"] 
+
+class RecipeImageSerializer(serializers.ModelSerializer):
+    """Serializer for uploadding images to recipes."""
+
+    class Meta:
+        model = Recipe
+        fields = ["id", "image"]
+        extra_kwargs = {"image":{"required":"True"}}
+
+        # the reason for creating a seperate serializer for the image field is due to the fact that
+        # we only like to upload one particlar type of data to a particular endpoint.
