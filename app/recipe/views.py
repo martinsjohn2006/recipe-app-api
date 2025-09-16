@@ -90,10 +90,10 @@ class RecipeViewSet(viewsets.ModelViewSet):
         if ingredients:
             ingredient_ids = self._params_to_ints(ingredients)
             queryset = queryset.filter(ingredients__id__in=ingredient_ids)
-             
+              
 
 # returning distinct values because one recipe can be assigned to more than one tag or ingredient.
-        return queryset.filter(user=self.request.user).order_by("-id").distinct() 
+        return queryset.filter(user=self.request.user).order_by("-id").distinct()
        
     def get_serializer_class(self): # the way is that image uploads would be separate from uploading other fields. so as a post request
         """Return the serializer class for request """
